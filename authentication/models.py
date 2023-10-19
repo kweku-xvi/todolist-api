@@ -13,9 +13,6 @@ from datetime import datetime, timedelta
 
 class MyUserManager(UserManager):
     def _create_user(self, username, email, password, **extra_fields):
-        """
-        Create and save a user with the given username, email, and password.
-        """
         if not username:
             raise ValueError("The given username must be set")
 
@@ -23,9 +20,6 @@ class MyUserManager(UserManager):
             raise ValueError("The given email must be set")
 
         email = self.normalize_email(email)
-        # Lookup the real model class from the global app registry so this
-        # manager method can be used in migrations. This is fine because
-        # managers are by definition working on the real model.
         GlobalUserModel = apps.get_model(
             self.model._meta.app_label, self.model._meta.object_name
         )
@@ -53,13 +47,6 @@ class MyUserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin, TrackingModel):
-    """
-    An abstract base class implementing a fully featured User model with
-    admin-compliant permissions.
-
-    Username and password are required. Other fields are optional.
-    """
-
     username_validator = UnicodeUsernameValidator()
 
     username = models.CharField(
