@@ -122,6 +122,12 @@ STATIC_URL = 'static/'
 
 AUTH_USER_MODEL = 'authentication.User' # setting the auth user model
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'authentication.jwt.JWTAuthentication',
+    ]
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
