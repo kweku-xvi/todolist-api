@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'authentication',
     'todos',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -125,7 +126,8 @@ AUTH_USER_MODEL = 'authentication.User' # setting the auth user model
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'authentication.jwt.JWTAuthentication',
-    ]
+    ],
+    'DEFAULT_PAGINATION_CLASSES': 'rest_framework.pagination.PageNumberPagination',
 }
 
 # Default primary key field type
